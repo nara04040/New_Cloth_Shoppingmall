@@ -3,57 +3,56 @@
 import React from "react";
 import "./button.css";
 
+type ButtonVariant = "filled" | "outlined";
+type ButtonColor = "primary" | "secondary" | "red" | "black" | "gray";
+type ButtonSize = "sm" | "md" | "lg";
 interface ButtonProps {
-  /**
-   * Is this the principal call to action on the page?
-   */
-  primary?: boolean;
-  outline?: boolean;
-  /**
-   * What background color to use
-   */
-  backgroundColor?: string;
-  /**
-   * How large should the button be?
-   */
-  size?: "small" | "medium" | "large";
-  /**
-   * Button contents
-   */
-  label: string;
-  /**
-   * Optional click handler
-   */
-  onClick?: () => void;
+  variant?: ButtonVariant;
+  color?: ButtonColor;
+  size?: ButtonSize;
+  children: React.ReactNode;
+  disabled?: boolean;
 }
 
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({ primary = false, outline = false, size = "medium", backgroundColor, label, ...props }: ButtonProps) => {
-  const sizeClasses = {
-    small: "text-xs px-4 py-2",
-    medium: "text-sm px-5 py-2.5",
-    large: "text-lg px-6 py-3",
-  };
-  // const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
-  const primaryClasses = primary ? "bg-blue-500 text-white" : "bg-transparent text-gray-800 border border-gray-400";
+export const Button = ({ variant = "filled", color = "primary", size = "md", children, disabled = false, ...props }: ButtonProps) => {
+  const baseStyles = "rounded font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2";
 
-  const outlineClasses = outline ? "border border-black" : "text-gray border border-gray-500";
+  const sizeStyles = {
+    sm: "py-1 px-2 text-sm",
+    md: "py-2 px-4",
+    lg: "py-3 px-6 text-lg",
+  };
+
+  const colorStyles = {
+    primary: {
+      filled: "bg-blue-500 hover:bg-blue-600 text-white focus:ring-blue-400",
+      outlined: "bg-transparent hover:bg-blue-100 text-blue-500 border-blue-500 border focus:ring-blue-400",
+    },
+    secondary: {
+      filled: "bg-gray-500 hover:bg-gray-600 text-white focus:ring-gray-400",
+      outlined: "bg-transparent hover:bg-gray-100 text-gray-500 border-gray-500 border focus:ring-gray-400",
+    },
+    red: {
+      filled: "bg-red-500 hover:bg-red-600 text-white focus:ring-red-400",
+      outlined: "bg-transparent hover:bg-red-100 text-red-500 border-red-500 border focus:ring-red-400",
+    },
+    black: {
+      filled: "bg-black hover:bg-black text-white focus:ring-black",
+      outlined: "bg-transparent hover:bg-gray-100 text-black border-black border focus:ring-gray-100",
+    },
+    gray: {
+      filled: "bg-black hover:bg-black text-white focus:ring-black",
+      outlined: "bg-transparent text-gray-400 border border-gray-400 hover:bg-gray-100 focus:ring-gray-100",
+    },
+  };
+
+  const buttonStyles = `${baseStyles} ${sizeStyles[size]} ${colorStyles[color][variant]}`;
   return (
-    <button
-      type="button"
-      // className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      className={`font-bold rounded-full cursor-pointer inline-block leading-none ${sizeClasses[size]} ${primaryClasses} ${outlineClasses}`}
-      style={{ backgroundColor }}
-      {...props}
-    >
-      {label}
-      <style jsx>{`
-        button {
-          background-color: ${backgroundColor};
-        }
-      `}</style>
+    <button className={buttonStyles} {...props}>
+      {children}
     </button>
   );
 };
