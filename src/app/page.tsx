@@ -1,3 +1,5 @@
+/** @format */
+
 "use client";
 
 import { Button } from "@/stories/Button";
@@ -7,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Header user={{ name: "Jane Doe" }} />
-      <Button label="button" outline={true} />
+      <Button variant="filled" color="primary" size="sm" children="hi" />
     </>
   );
 }

@@ -1,7 +1,6 @@
 /** @format */
 
 import React from "react";
-import "./button.css";
 
 type ButtonVariant = "filled" | "outlined";
 type ButtonColor = "primary" | "secondary" | "red" | "black" | "gray";
@@ -11,6 +10,7 @@ interface ButtonProps {
   color?: ButtonColor;
   size?: ButtonSize;
   children: React.ReactNode;
+  onClick?: () => void;
   disabled?: boolean;
 }
 
