@@ -42,7 +42,7 @@ export const Secondary: Story = {
   },
 };
 
-export const Red: Story = {
+export const Purchase: Story = {
   args: {
     variant: "filled",
     color: "red",
