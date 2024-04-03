@@ -1,52 +1,79 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
-import { Button } from './Button';
+import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
+import { Button } from "./Button";
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-  title: 'Example/Button',
+  title: "Example/Button",
   component: Button,
-  parameters: {
-    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    layout: 'centered',
-  },
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
-  tags: ['autodocs'],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
+  tags: ["autodocs"],
   argTypes: {
-    backgroundColor: { control: 'color' },
+    variant: {
+      control: { type: "radio", options: ["filled", "outlined"] },
+    },
+    color: {
+      control: { type: "radio", options: ["primary", "secondary", "red"] },
+    },
+    size: {
+      control: { type: "radio", options: ["sm", "md", "lg"] },
+    },
   },
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {
-    primary: true,
-    label: 'Button',
+    variant: "filled",
+    color: "primary",
+    size: "sm",
+    children: null,
   },
 };
 
 export const Secondary: Story = {
   args: {
-    label: 'Button',
+    variant: "outlined",
+    color: "secondary",
+    size: "md",
+    children: null,
   },
 };
 
-export const Large: Story = {
+export const Purchase: Story = {
   args: {
-    size: 'large',
-    label: 'Button',
+    variant: "filled",
+    color: "red",
+    size: "lg",
+    children: "구매하기",
   },
 };
 
-export const Small: Story = {
+export const Order: Story = {
   args: {
-    size: 'small',
-    label: 'Button',
+    variant: "filled",
+    color: "black",
+    size: "lg",
+    children: "주문하기",
+  },
+};
+
+export const Outline: Story = {
+  args: {
+    variant: "outlined",
+    color: "black",
+    size: "md",
+    children: "button",
+    disabled: false,
+  },
+};
+
+export const Outlinedisabled: Story = {
+  args: {
+    variant: "outlined",
+    color: "gray",
+    size: "md",
+    children: "button",
+    disabled: true,
   },
 };
