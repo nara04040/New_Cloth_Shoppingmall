@@ -1,8 +1,6 @@
-/** @format */
-
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
-import { Header } from "./Header";
+import Header from "./Header";
 
 const meta = {
   title: "Example/Header",
@@ -29,4 +27,10 @@ export const LoggedIn: Story = {
   },
 };
 
-export const LoggedOut: Story = {};
+export const LoggedOut: Story = {
+  args: {
+    user: {
+      name: "",
+    },
+  },
+};
