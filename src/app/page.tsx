@@ -1,9 +1,7 @@
-/** @format */
-
 "use client";
 
 import { Button } from "@/stories/Button";
-import { Header } from "@/stories/Header";
+import Header from "@/stories/Header";
 
 export default function Home() {
   return (

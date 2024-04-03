@@ -1,9 +1,4 @@
-/** @format */
-
 import React from "react";
-
-import { Button } from "./Button";
-import "./header.css";
 import Image from "next/image";
 import Logo from "./assets/showppingmall_logo.svg";
 
@@ -18,7 +13,7 @@ interface HeaderProps {
   onCreateAccount?: () => void;
 }
 
-export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps) => (
+const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps) => (
   <header>
     <div className="flex items-center justify-between py-3 px-5 border-b border-gray-200">
       <div className="flex items-center">
@@ -110,3 +105,5 @@ export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps
     </div>
   </header>
 );
+
+export default Header;
